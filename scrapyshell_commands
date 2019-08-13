@@ -1,0 +1,461 @@
+Last login: Sun Aug  4 21:33:06 on ttys001
+N/A: version "N/A" is not yet installed.
+
+You need to run "nvm install N/A" to install it before using it.
+Jeevananthams-MacBook-Pro:~ jeevananthamganesan$ scrapy shell
+:0: UserWarning: You do not have a working installation of the service_identity module: 'cannot import name opentype'.  Please install it from <https://pypi.python.org/pypi/service_identity> and make sure all of its dependencies are satisfied.  Without the service_identity module, Twisted can perform only rudimentary TLS client hostname verification.  Many valid certificate/hostname mappings may be rejected.
+2019-08-04 21:56:28 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: scrapybot)
+2019-08-04 21:56:28 [scrapy.utils.log] INFO: Versions: lxml 3.7.2.0, libxml2 2.9.4, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 17.9.0, Python 2.7.13 |Anaconda custom (x86_64)| (default, Dec 20 2016, 23:05:08) - [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)], pyOpenSSL 16.2.0 (OpenSSL 1.0.2k  26 Jan 2017), cryptography 1.7.1, Platform Darwin-18.6.0-x86_64-i386-64bit
+2019-08-04 21:56:28 [scrapy.crawler] INFO: Overridden settings: {'LOGSTATS_INTERVAL': 0, 'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter'}
+2019-08-04 21:56:28 [scrapy.extensions.telnet] INFO: Telnet Password: df7df4af0c6ab685
+2019-08-04 21:56:28 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-08-04 21:56:28 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-08-04 21:56:28 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-08-04 21:56:28 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2019-08-04 21:56:28 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-08-04 21:56:29 [traitlets] DEBUG: Using default logger
+2019-08-04 21:56:29 [traitlets] DEBUG: Using default logger
+[s] Available Scrapy objects:
+[s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)
+[s]   crawler    <scrapy.crawler.Crawler object at 0x10974bd50>
+[s]   item       {}
+[s]   settings   <scrapy.settings.Settings object at 0x10974bdd0>
+[s] Useful shortcuts:
+[s]   fetch(url[, redirect=True]) Fetch URL and update local objects (by default, redirects are followed)
+[s]   fetch(req)                  Fetch a scrapy.Request and update local objects 
+[s]   shelp()           Shell help (print this help)
+[s]   view(response)    View response in a browser
+In [1]: fetch("https://www.interest.co.nz/property/residential-auction-results?&
+   ...: page=1")
+2019-08-04 21:56:57 [scrapy.core.engine] INFO: Spider opened
+2019-08-04 21:56:58 [scrapy.core.downloader.tls] WARNING: Remote certificate is not valid for hostname "www.interest.co.nz"; u'*.interest.co.nz'!=u'www.interest.co.nz'
+2019-08-04 21:56:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.interest.co.nz/property/residential-auction-results?&page=1> (referer: None)
+
+In [2]: view(response)
+Out[2]: True
+
+In [3]: response.css(".address::text").extract()
+Out[3]: 
+[u'88-94 Seventeenth Avenue, Tauranga South',
+ u'152 Waikite Road, Welcome Bay',
+ u'526-530 Devonport Road, Tauranga South',
+ u'3B Cook Street, Gate Pa',
+ u'67b Eighth Avenue, Avenues',
+ u'297D Oceanbeach Road, Mt Maunganui',
+ u'87 Mortlake Heights, Pyes Pa',
+ u'60 Levers Road, Matua',
+ u'1 Endeavour Avenue, Welcome Bay',
+ u'35 Plateau Heights, Mt Maunganui',
+ u'5 Redhaven Place, Bethlehem',
+ u'62 Levers Road, Matua',
+ u'1047T Purangi Road, Cooks Beach',
+ u'178 Levers Road, Matua',
+ u'47 Palazzo Drive, Papamoa',
+ u'67a Eighth Avenue, Avenues',
+ u'14 Banksia Dell, Mount Maunganui',
+ u'814/5 Howe St, Freemans Bay.',
+ u'1103/430 Queen St, Auckland Central.',
+ u'1V/16 Burton St, Grafton.',
+ u'5G/15 Whitaker Place, Auckland Central.',
+ u'3B/23 Emily Place, Auckland Central.',
+ u'1315/1 Courthouse Lane, Auckland central.',
+ u'132 Ohiwa Loop Road, Opotiki',
+ u'245 Athenree Road, Athenree']
+
+In [4]: response.css(".region-district::text").extract()
+Out[4]: 
+[u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Coromandel, Thames-Coromandel',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Bay of Plenty, Tauranga',
+ u'Auckland, Auckland City',
+ u'Auckland, Auckland City',
+ u'Auckland, Auckland City',
+ u'Auckland, Auckland City',
+ u'Auckland, Auckland City',
+ u'Auckland, Auckland City',
+ u'Bay of Plenty, Opotiki',
+ u'Bay of Plenty, Western Bay Of Plenty']
+
+In [5]: response.css(".padb-beds::text").extract()
+Out[5]: 
+[u'9',
+ u'6',
+ u'2',
+ u'2',
+ u'2',
+ u'3',
+ u'3',
+ u'2',
+ u'3',
+ u'3',
+ u'3',
+ u'3',
+ u'4',
+ u'2',
+ u'3',
+ u'2',
+ u'2',
+ u'2',
+ u'2',
+ u'1',
+ u'1',
+ u'5',
+ u'4']
+
+In [6]: response.css(".padb-baths::text").extract()
+Out[6]: 
+[u'4',
+ u'3',
+ u'1',
+ u'1',
+ u'1',
+ u'2',
+ u'2',
+ u'1',
+ u'2',
+ u'2',
+ u'2',
+ u'2',
+ u'2',
+ u'1',
+ u'2',
+ u'2',
+ u'1',
+ u'2',
+ u'1',
+ u'1',
+ u'1',
+ u'3',
+ u'3']
+
+In [7]: response.css(".padb-auction-details::text").extract()
+Out[7]: 
+[u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Thursday, 1st August '19      ",
+ u'\n                ',
+ u"Wednesday, 31st July '19      ",
+ u'\n                ',
+ u"Wednesday, 31st July '19      ",
+ u'\n                ',
+ u"Wednesday, 31st July '19      ",
+ u'\n                ',
+ u"Wednesday, 31st July '19      ",
+ u'\n                ',
+ u"Wednesday, 31st July '19      "]
+
+In [8]: response.css(".padb-ribbon padb-ribbon-sold::text").extract()
+Out[8]: []
+
+In [9]: response.css(".padb-ribbon padb-ribbon-sold::text").extract()
+Out[9]: []
+
+In [10]: response.css(".padb-property-value::text").extract()
+Out[10]: 
+[u'\n        ',
+ u' $1,560,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $707,500              ',
+ u'\n        ',
+ u' $945,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $1,375,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $470,000              ',
+ u'\n        ',
+ u' $815,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $425,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $225,000              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u' $401,500              ',
+ u'\n        ',
+ u'              ',
+ u'\n        ',
+ u'              ']
+
+In [11]: response.css(".padb-listing-id::text").extract()
+Out[11]: 
+[u'\n        ',
+ u'ech1261      ',
+ u'\n        ',
+ u'ebt3264      ',
+ u'\n        ',
+ u'ech1262      ',
+ u'\n        ',
+ u'etl1478      ',
+ u'\n        ',
+ u'ech1239      ',
+ u'\n        ',
+ u'epa3204      ',
+ u'\n        ',
+ u'etl1474      ',
+ u'\n        ',
+ u'ech1242      ',
+ u'\n        ',
+ u'ebt3266      ',
+ u'\n        ',
+ u'emt3583      ',
+ u'\n        ',
+ u'ect3653      ',
+ u'\n        ',
+ u'ech1241      ',
+ u'\n        ',
+ u'ektc2017      ',
+ u'\n        ',
+ u'ech1236      ',
+ u'\n        ',
+ u'epa3205      ',
+ u'\n        ',
+ u'ech1238      ',
+ u'\n        ',
+ u'emt3586      ',
+ u'\n        ',
+ u'2139956      ',
+ u'\n        ',
+ u'2133026      ',
+ u'\n        ',
+ u'2143074      ',
+ u'\n        ',
+ u'18810854      ',
+ u'\n        ',
+ u'18803738      ',
+ u'\n        ',
+ u'18814933      ',
+ u'\n        ',
+ u'2500525      ',
+ u'\n        ',
+ u'2500540      ']
+
+In [12]: response.css(".padb-ribbon-sold::text").extract()
+Out[12]: []
+
+In [13]: response.css(".padb-ribbon.padb-ribbon-sold::text").extract()
+Out[13]: []
+
+In [14]: response.css(".padb-ribbon. padb-ribbon-sold::text").extract()
+  File "<string>", line unknown
+SelectorSyntaxError: Expected ident, got <S ' ' at 13>
+
+
+In [15]: response.css(".padb-ribbon . padb-ribbon-sold::text").extract()
+  File "<string>", line unknown
+SelectorSyntaxError: Expected ident, got <S ' ' at 14>
+
+
+In [16]: response.css(".padb-ribbon .padb-ribbon-sold::text").extract()
+Out[16]: []
+
+In [17]: response.css(".padb-ribbon.padb-ribbon-sold::text").extract()
+Out[17]: []
+
+In [18]: response.css("div.padb-ribbon.padb-ribbon-sold::text").extract()
+Out[18]: []
+
+In [19]: response.css("span.padb-ribbon.padb-ribbon-sold::text").extract()
+Out[19]: []
+
+In [20]: response.css(".padb-ribbon::text").extract()
+Out[20]: []
+
+In [21]: response.xpath("//span[contains(@class, 'title') and contains(@class, '
+    ...: ng-binding')]")
+Out[21]: []
+
+In [22]: response.xpath("//span[contains(@class, 'padb-ribbon') and contains(@cl
+    ...: ass, 'padb-ribbon-sold')]")
+Out[22]: []
+
+In [23]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]")
+Out[23]: 
+[<Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>,
+ <Selector xpath="//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]" data=u'<div class="padb-ribbon padb-ribbon-sold'>]
+
+In [24]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]").extract()
+Out[24]: 
+[u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>']
+
+In [25]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]::text").extract()
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-25-8848dfb901df> in <module>()
+----> 1 response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]::text").extract()
+
+/Users/jeevananthamganesan/anaconda/lib/python2.7/site-packages/scrapy/http/response/text.pyc in xpath(self, query, **kwargs)
+    117 
+    118     def xpath(self, query, **kwargs):
+--> 119         return self.selector.xpath(query, **kwargs)
+    120 
+    121     def css(self, query):
+
+/Users/jeevananthamganesan/anaconda/lib/python2.7/site-packages/parsel/selector.pyc in xpath(self, query, namespaces, **kwargs)
+    240             msg = u"XPath error: %s in %s" % (exc, query)
+    241             msg = msg if six.PY3 else msg.encode('unicode_escape')
+--> 242             six.reraise(ValueError, ValueError(msg), sys.exc_info()[2])
+    243 
+    244         if type(result) is not list:
+
+/Users/jeevananthamganesan/anaconda/lib/python2.7/site-packages/parsel/selector.pyc in xpath(self, query, namespaces, **kwargs)
+    236             result = xpathev(query, namespaces=nsp,
+    237                              smart_strings=self._lxml_smart_strings,
+--> 238                              **kwargs)
+    239         except etree.XPathError as exc:
+    240             msg = u"XPath error: %s in %s" % (exc, query)
+
+src/lxml/lxml.etree.pyx in lxml.etree._Element.xpath (src/lxml/lxml.etree.c:59369)()
+
+src/lxml/xpath.pxi in lxml.etree.XPathElementEvaluator.__call__ (src/lxml/lxml.etree.c:171243)()
+
+src/lxml/xpath.pxi in lxml.etree._XPathEvaluatorBase._handle_result (src/lxml/lxml.etree.c:170200)()
+
+ValueError: XPath error: Invalid expression in //*[contains(@class, 'padb-ribbon') and contains(@class, 'padb-ribbon-sold')]::text
+
+In [26]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]").extract()
+Out[26]: 
+[u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>']
+
+In [27]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]/text()").extract()
+Out[27]: []
+
+In [28]: response.xpath("//*[contains(@class, 'padb-ribbon') and contains(@class
+    ...: , 'padb-ribbon-sold')]").extract()
+Out[28]: 
+[u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>',
+ u'<div class="padb-ribbon padb-ribbon-sold"><span>Sold</span></div>']
+
+In [29]: 
